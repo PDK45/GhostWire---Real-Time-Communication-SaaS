@@ -1,0 +1,15 @@
+{
+    "name": "GhostWire Secure Comms",
+    "short_name": "GhostWire",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050510",
+    "theme_color": "#0bf",
+    "icons": [
+        {
+            "src": "/static/images/cyberpunk_app_icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
