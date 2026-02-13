@@ -336,3 +336,6 @@ body {
         margin-right: 5px;
     }
 }
+/* FLASH MESSAGE PROTOCOL */
+.redacted { background-color: var(--neon-blue); color: var(--neon-blue); border-radius: 2px; padding: 0 5px; cursor: help; transition: all 0.2s ease; user-select: none; }
+.redacted:hover { background-color: transparent; color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue); user-select: text; }
