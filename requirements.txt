@@ -5,3 +5,4 @@ stegano>=1.0.0
 Pillow
 eventlet==0.33.3
 pyngrok==7.1.0
+gunicorn==21.2.0
