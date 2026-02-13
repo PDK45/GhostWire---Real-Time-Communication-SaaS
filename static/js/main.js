@@ -192,9 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Text Message
             const msg = messageInput.value.trim();
+            const isFlash = document.getElementById('flash-mode-check').checked;
             if (msg) {
-                socket.emit('message', { msg: msg });
+                socket.emit('message', { msg: msg, is_flash: isFlash });
                 messageInput.value = '';
+                document.getElementById('flash-mode-check').checked = false;
             }
         }
     }
@@ -224,6 +226,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (type === 'text') {
             const text = document.createElement('div');
             text.innerText = data.msg;
+            if (data.is_flash) {
+                text.className = 'redacted';
+                text.title = "HOVER TO DECRYPT";
+            }
             div.appendChild(text);
         } else if (type === 'image') {
             const img = document.createElement('img');
