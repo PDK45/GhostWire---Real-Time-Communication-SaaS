@@ -3,6 +3,7 @@ services:
     name: ghostwire
     env: docker
     dockerfilePath: Dockerfile.app
+    plan: free
     envVars:
       - key: FLASK_SECRET_KEY
         generateValue: true
