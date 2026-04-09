@@ -9,7 +9,12 @@ app.config['DEBUG'] = True
 
 # Initialize SocketIO
 # allow_unsafe_werkzeug=True is needed for dev environment if using Werkzeug
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading') 
+redis_url = os.environ.get('REDIS_URL')
+if redis_url:
+    print(f"Using Redis message queue: {redis_url}")
+    socketio = SocketIO(app, cors_allowed_origins="*", message_queue=redis_url, async_mode='eventlet')
+else:
+    socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')  
 
 # Register Events
 register_socketio_events(socketio)

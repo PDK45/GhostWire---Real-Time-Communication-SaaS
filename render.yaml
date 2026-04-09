@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: ghostwire
+    env: docker
+    dockerfilePath: Dockerfile.app
+    envVars:
+      - key: FLASK_SECRET_KEY
+        generateValue: true

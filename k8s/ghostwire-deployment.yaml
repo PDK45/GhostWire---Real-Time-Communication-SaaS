@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ghostwire-app
+  labels:
+    app: ghostwire-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ghostwire-app
+  template:
+    metadata:
+      labels:
+        app: ghostwire-app
+    spec:
+      containers:
+      - name: ghostwire-app
+        # Replace <YOUR_DOCKER_HUB_USERNAME> before applying
+        image: pdk45/ghostwire-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env:
+        - name: REDIS_URL
+          value: "redis://redis:6379/0"
+        - name: FLASK_SECRET_KEY
+          value: "k8s-prod-secret-123"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ghostwire-app
+spec:
+  type: ClusterIP
+  selector:
+    app: ghostwire-app
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000

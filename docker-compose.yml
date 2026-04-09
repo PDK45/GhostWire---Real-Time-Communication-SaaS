@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+
+  ghostwire-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - FLASK_SECRET_KEY=local-dev-secret-123
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+
+  ghostwire-proxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.proxy
+    ports:
+      - "8080:80"
+    depends_on:
+      - ghostwire-app
